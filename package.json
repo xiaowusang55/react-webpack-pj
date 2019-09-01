@@ -1,0 +1,24 @@
+{
+  "name": "react-webpack-pj",
+  "version": "1.0.0",
+  "description": "react-webpack-pj",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaowusang55/react-webpack-pj.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaowusang55/react-webpack-pj/issues"
+  },
+  "homepage": "https://github.com/xiaowusang55/react-webpack-pj#readme",
+  "devDependencies": {
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
+  }
+}
