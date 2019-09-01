@@ -1,15 +1,14 @@
 import _ from 'lodash';
-import './style.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ShoppingList from './component/demo.jsx';
+import Game from './component/Tic-Tac-Toe/tic-tac-toe.jsx';
 
 
 ReactDOM.render(
-    <ShoppingList name="ar_lang" />,
-    document.querySelector('#root')
-)
+    <Game />,
+    document.getElementById('root')
+);
 
 
 
