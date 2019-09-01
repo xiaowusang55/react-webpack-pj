@@ -1,5 +1,15 @@
-function component() {
-    const element = document.createElement('div');
+import _ from 'lodash';
+import './style.css';
 
-    //Loadsh, currently included
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ShoppingList from './component/demo.jsx';
+
+
+ReactDOM.render(
+    <ShoppingList name="ar_lang" />,
+    document.querySelector('#root')
+)
+
+
+
