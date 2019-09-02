@@ -21,33 +21,35 @@
 
     <script type="text/babel">
 
-        function Comment(props) {
-            return (
-                <div className="Comment">
-                    <UserInfo user={props.author} />
-                    <div className="Comment-text">
-                        {props.text}
-                    </div>
-                    <div className="Comment-date">
-                        {formatDate(props.date)}
-                    </div>
-                </div>
-            )
-        }
+        // function Comment(props) {
+        //     return (
+        //         <div className="Comment">
+        //             <UserInfo user={props.author} />
+        //             <div className="Comment-text">
+        //                 {props.text}
+        //             </div>
+        //             <div className="Comment-date">
+        //                 {formatDate(props.date)}
+        //             </div>
+        //         </div>
+        //     )
+        // }
 
 
 
-        ReactDOM.render(
-            <Comment 
-                {
-                    author: { avatarUrl: 'baidu.com', name: 'ar_lang' },
-                    text: 'hello React',
-                    date: '2020'
-                }
-            />,
-            document.querySelector('#root')
-        )
+        // ReactDOM.render(
+        //     <Comment 
+        //         {
+        //             author: { avatarUrl: 'baidu.com', name: 'ar_lang' },
+        //             text: 'hello React',
+        //             date: '2020'
+        //         }
+        //     />,
+        //     document.querySelector('#root')
+        // )
 
+        const promise = new Promise(() => {}, () => {});
+        console.log(promise, typeof promise);
 
     </script>
 

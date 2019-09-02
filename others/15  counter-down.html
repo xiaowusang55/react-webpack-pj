@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .counter {
+            background-color: #000000;
+            width: 500px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 6px 6px 20px red;
+        }
+        span {
+            color: white;
+            font-size: 50px;
+            font-weight: 900;
+            text-shadow: 4px 4px 5px brown;
+        }
+        span>b {
+            color: brown;
+            text-shadow: 4px 4px 5px white;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+        function Clock() {
+
+            let currentTimeS = new Date().getTime();
+            let gDayS = new Date('2019, 9, 20').getTime();
+
+            let daysLeftS = gDayS - currentTimeS;
+
+            let daysLeft = Math.floor(daysLeftS/(1000*60*60*24));
+            let hoursLeft = Math.floor(daysLeftS%(1000*60*60*24)/(1000*60*60));
+            let minutesLeft = Math.floor(daysLeftS%(1000*60*60)/(1000*60));
+            let secondsLeft = Math.floor(daysLeftS%(1000*60)/1000);
+
+            const element = (
+                <div className="counter">
+                    <span>{daysLeft}<b>d </b></span>
+                    <span>{hoursLeft}<b>h </b></span>
+                    <span>{minutesLeft}<b>m </b></span>
+                    <span>{secondsLeft}<b>s</b></span>
+                </div>
+            );
+
+            ReactDOM.render(
+                element,
+                document.querySelector('#root')
+            )
+
+        }
+
+        setInterval(() => Clock(), 1000);
+
+    </script>
+
+</body>
+
+</html>
