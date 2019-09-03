@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .showbox {
+            width: 500px;
+            height: 215px;
+            box-shadow: 4px 4px 10px rgba(211, 211, 211, 0.863);
+        }
+        .fruits {
+            padding: 0;
+            margin: 0;
+            background-color:lightgray;
+        }
+        .fruits li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            transition: all .1s;
+        }
+        .fruits li:hover {
+            background-color: gray;
+        }
+        .fruits li span:hover {
+            cursor: pointer;
+            color: white;
+        }
+        .history {
+            height: 200px;
+        }
+        .history ul {
+            padding: 0;
+            margin: 0;
+        }
+        .history ul li {
+            width: 80px;
+            background-color: gray;
+            margin-bottom: 10px;
+            padding: 10px;
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            transition: all .2s;
+            font-size: 14px;
+        }
+        .history ul li:hover {
+            background-color: lightgray;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            color:lightgray;
+        }
+        
+        .history ul li span {
+            display: inline-block;
+            width: 0;
+            height: 40px;
+            line-height: 40px;
+            overflow: hidden;
+            position: absolute;
+            
+        }
+        .history ul li:hover span {
+            width: 80px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-weight: 900;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type=text/babel>
+        
+        
+        class ListItem extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    fruits: ['Apple','Banana','Watermelon', 'Grapes', 'Peach'],
+                    chosen: [],
+                    
+                };
+                this.bingo = this.bingo.bind(this);
+                this.regret = this.regret.bind(this);
+            }
+
+            // DELETE
+            bingo(ev) {
+                //SHALLO COPY OF STATE
+                let newFruits = this.state.fruits;
+                let newChosen = this.state.chosen;
+                //DEEP COPY FOR HISTORY
+                let deepcopy = JSON.parse(JSON.stringify(this.state.fruits));
+                
+                if (ev.target.nodeName === 'SPAN') {
+                    //GET INDEX WHEN CLICKED
+                    let index = ev.target.dataset.index;
+
+                    //CHANGE THE SHALOW COPY
+                    newFruits.splice(index, 1);
+
+                    newChosen.push(deepcopy[index]);
+
+                    //SYNCHRONISE THE STATE
+                    this.setState({
+                        fruits: newFruits,
+                    });
+
+                    this.setState({
+                        chosen: newChosen,
+                    });
+
+                }
+            }
+
+            // BACK
+            regret(ev) {
+                let fruitsNow = this.state.fruits;
+                let chosenNow = this.state.chosen;
+                
+                if (ev.target.nodeName === 'SPAN') {
+
+                    let num = ev.target.dataset.num;
+                    fruitsNow.push(chosenNow[num]);
+                    
+                    chosenNow.splice(num, 1);
+                   
+                    this.setState({
+                        fruits: fruitsNow,
+                    })
+                    this.setState({
+                        chosen: chosenNow,
+                    })
+                    
+                }
+            }
+
+
+
+
+            render() {
+                //FRUISTS TEMPLATE
+                let list = this.state.fruits.map((item, i) => (
+                        <li key={i}>
+                            {item}
+                            <span data-index={i}>&otimes;</span>
+                        </li>
+                    )
+                )
+
+                //HISTROY TEMPLATE
+                let historyList = this.state.chosen.map((item, i) => (
+                    <li key={i} >
+                        {item}
+                        <span data-num={i}>BACK?</span>
+                    </li>
+                ))
+                
+                //MAIN VIEW ENTRY
+                return (
+                    <div>
+                        <div className="showbox">
+                            <ul className="fruits" onClick={this.bingo}>{list}</ul>
+                        </div>
+                        <div className="history">
+                            <h4>History:</h4>    
+                            <ul onClick={this.regret}>{historyList}</ul>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(
+            <ListItem />,
+            document.querySelector('#root')
+        )
+
+
+
+    </script>
+
+
+</body>
+
+</html>
