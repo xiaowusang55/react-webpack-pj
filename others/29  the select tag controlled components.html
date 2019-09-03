@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type=text/babel>
+        
+        class FlavorForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    value: 'coconut',
+                }
+                
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({
+                    value: event.target.value,
+                })
+            }
+
+            handleSubmit(event) {
+                console.log('Your favorite flavor is ' + this.state.value);
+                event.preventDefault();
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            <select onChange={this.handleChange} value={['grapefruit', 'coconut']} multiple={true}>
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                                <option value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                            </select>
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <FlavorForm />,
+            document.querySelector('#root')
+        )
+
+    </script>
+
+
+</body>
+
+</html>
