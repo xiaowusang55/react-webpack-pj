@@ -11,7 +11,7 @@
             width: 500px;
         }
         .fruits {
-            height: 300px;
+            /* height: 300px; */
             box-shadow: 4px 4px 10px rgba(211, 211, 211, 0.863);
             padding: 0;
             margin: 0;
@@ -28,7 +28,7 @@
         }
         .fruits li span:hover {
             cursor: pointer;
-            color: white;
+            color: red;
         }
         .history {
             height: 200px;
@@ -48,6 +48,7 @@
             color: #fff;
             transition: all .2s;
             font-size: 14px;
+            overflow: hidden;
         }
         .history ul li:hover {
             background-color: lightgray;
@@ -97,10 +98,12 @@
                 this.state = {
                     fruits: ['Apple','Banana','Watermelon', 'Grapes', 'Peach', 'orange'],
                     chosen: [],
+                    addfruit: ''
                     
                 };
                 this.bingo = this.bingo.bind(this);
                 this.regret = this.regret.bind(this);
+                this.addFruits = this.addFruits.bind(this);
             }
 
             // DELETE
@@ -130,6 +133,16 @@
                     });
 
                 }
+            }
+
+            //ADD
+            addFruits() {
+                let addfruits = this.state.fruits;
+                addfruits.push(this.state.addfruit);
+
+                this.setState({
+                    fruits: addfruits
+                })
             }
 
             // BACK
@@ -175,6 +188,11 @@
                 //MAIN VIEW ENTRY
                 return (
                     <div>
+                        <input type="text"
+                            value={this.state.addfruit}
+                            onChange={e => this.setState({addfruit: e.target.value})}
+                        />
+                        <button onClick={this.addFruits}>ADD</button>
                         <div className="showbox">
                             <ul className="fruits" onClick={this.bingo}>{list}</ul>
                         </div>

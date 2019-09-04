@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+
+    </head>
+    
+    <body>
+    
+    
+        <div id="root"></div>
+    
+    
+        <script crossorigin src="./lib/react.development.js"></script>
+        <script crossorigin src="./lib/react-dom.development.js"></script>
+        <script src="./lib/babel.min.js"></script>
+    
+        <script type=text/babel>
+
+            function Contacts() {
+                return (
+                    <h1>Contacts</h1>
+                )
+            }
+            function Chat() {
+                return (
+                    <h1>Chat</h1>
+                )
+            }
+
+            function SplitPane(props) {
+                console.log(props)
+                return (
+                    <div className="SplitPane"> 
+                        <div className="SplitPane-left">
+                            {props.left}
+                        </div>
+                        <div className="SplitPane-right">
+                            {props.right}
+                        </div>
+                    </div>
+                );
+            }
+
+            function App() {
+                return (
+                    <SplitPane  
+                        left={<Contacts />}
+                        right={<Chat />}
+                    />
+                )
+            }
+
+            ReactDOM.render(
+                <App />,
+                document.querySelector('#root')
+            )
+
+
+        </script>
+    
+    
+    </body>
+    
+    </html>
