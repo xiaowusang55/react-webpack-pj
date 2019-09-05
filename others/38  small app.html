@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="root"></div>
+    
+    
+    <script crossorigin src="./lib/react.development.js"></script>
+    <script crossorigin src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+    
+
+        class ListInput extends React.Component {
+            
+            constructor(props) {
+                super(props);
+                this.addFruits = this.addFruits.bind(this);
+                this.makeMore = this.makeMore.bind(this);
+            }
+
+            addFruits(e) {
+                this.props.nameAsYouLike(e.target.value)
+            }
+
+            makeMore() {
+                this.props.nameAsYouLikeToo()
+            }
+
+            render() {
+                const fruit = this.props.fruits;
+                return (
+                    <div>
+                        <input 
+                        type="text"  
+                        value={fruit} 
+                        onChange={this.addFruits} />
+                        <button onClick={this.makeMore}>ADD</button>
+                    </div>
+                )
+            }
+        }
+
+        class ListDisplay extends React.Component {
+            render() {
+                const fruit = this.props.fruit;
+
+                return (
+                    <div>
+                        <ul>
+                            {fruit.map(fru => <li key={fru.toString()}>{fru}</li>)}
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    fruits: '',
+                };
+                this.inputChange = this.inputChange.bind(this);
+                this.changeDisplay = this.changeDisplay.bind(this);
+            }
+
+            inputChange(fruit) {
+                this.setState({
+                    fruits: fruit
+                })
+            }
+
+            changeDisplay() {
+                // console.log(this.props.fruits)
+                // console.log(this.state.fruits)
+                this.props.fruits.push(this.state.fruits);
+                console.log(this.props.fruits)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h3>{this.state.fruits}</h3>
+                        <ListInput 
+                            fruits={this.state.fruits}
+                            nameAsYouLike={this.inputChange} 
+                            nameAsYouLikeToo={this.changeDisplay} />
+                        <ListDisplay fruit={this.props.fruits} />
+                    </div>
+                )
+            }
+        }
+
+        const FRUITS =  ['Apple', 'Orange', 'Peach', 'Watermelon'];
+        ReactDOM.render(
+            <App fruits={FRUITS} />,
+            document.querySelector('#root')
+        )
+
+
+    </script>
+
+
+
+
+</body>
+</html>

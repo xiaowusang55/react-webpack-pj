@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="root"></div>
+    
+    
+    <script crossorigin src="./lib/react.development.js"></script>
+    <script crossorigin src="./lib/react-dom.development.js"></script>
+    <script src="./lib/react-router-dom.min.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        console.log(ReactRouterDOM)
+
+        const BrowserRouter = ReactRouterDOM.BrowserRouter;
+        const Link = ReactRouterDOM.Link;
+        const Route = ReactRouterDOM.Route;
+        
+
+        function Index() {
+            return <h2>HOME</h2>
+        }
+
+        function About() {
+            return <h2>ABOUT</h2>
+        }
+        
+        function Users() {
+            return <h2>USERS</h2>
+        }
+
+        function AppRouter() {
+            return (
+                <BrowserRouter>
+                    <div>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <Link to='/'>Home</Link>    
+                                </li>    
+                                <li>
+                                    <Link to='/about/'>About</Link>    
+                                </li>    
+                                <li>
+                                    <Link to='/users/'>Users</Link>    
+                                </li>    
+                            </ul>
+                        </nav>
+
+                        <Route path='/' exact component={Index} />
+                        <Route path='/about/' component={About} />
+                        <Route path='/users/' component={Users} />
+                    </div>    
+                </BrowserRouter>
+            )
+        }
+
+        ReactDOM.render(
+            <AppRouter />,
+            document.querySelector('#root')
+        )
+
+
+    </script>
+
+
+
+
+</body>
+</html>

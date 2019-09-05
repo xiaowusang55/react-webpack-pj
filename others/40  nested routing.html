@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="root"></div>
+    
+    
+    <script crossorigin src="./lib/react.development.js"></script>
+    <script crossorigin src="./lib/react-dom.development.js"></script>
+    <script src="./lib/react-router-dom.min.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const BrowserRouter = ReactRouterDOM.BrowserRouter;
+        const Router = ReactRouterDOM.Router;
+        const Link = ReactRouterDOM.Link;
+        const Route = ReactRouterDOM.Route;
+        
+
+        function App() {
+            return (
+                <BrowserRouter>
+                    <div>
+                        <Header />
+                        
+                        <Route exact path='/' component={Home} />
+                        <Route path='/about' component={About} />
+                        <Route path='/topics' component={Topics} />
+                    </div>    
+                </BrowserRouter>
+            );
+        }
+
+        function Home() {
+            return <h2>I am Home</h2>
+        }
+
+        function About() {
+            return <h2>I am About</h2>
+        }
+
+        function Topic(match) {
+            console.log('from Topic ', match.params)
+            return <h3>Requested Param: {match.params}</h3>
+        }
+        
+        function Topics({match}) {
+            console.log(match)
+            console.log(match.url)
+            console.log(match.path)
+            return (
+                <div>
+                    <h2>Topics</h2>    
+
+                    <ul>
+                        <li>
+                            <Link to={`${match.url}/components`}>Components</Link>    
+                        </li>    
+                        <li>
+                            <Link to={`${match.url}/props-v-state`}>props-v-state</Link>    
+                        </li>      
+                    </ul>
+
+                    <Route 
+                        path={`${match.path}/:haha`} component={Topic}/>
+                    <Route 
+                        exact 
+                        path={match.path}
+                        render={() => <h3>Please select a topic.</h3>}
+                    />
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <ul>
+                    <li>
+                        <Link to='/'>Home from header</Link>    
+                    </li>
+                    <li>
+                        <Link to='/about'>About from header</Link>    
+                    </li>
+                    <li>
+                        <Link to='/topics'>Topics from header</Link>    
+                    </li>    
+                </ul>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.querySelector('#root')
+        )
+
+
+    </script>
+
+
+
+
+</body>
+</html>
