@@ -2,16 +2,14 @@ import _ from "lodash";
 
 import React from "react";
 import ReactDOM from "react-dom";
+import App from './component/2.nestedRouting.jsx';
+ReactDOM.render(<App />, document.querySelector('#root'));
 
 
 // ReactDOM.render(<counter />, document.querySelector('#root'))
 
 
 
-
-// nestedRouting import
-// import App from './component/2.nestedRouting.jsx';
-// ReactDOM.render(<App />, document.querySelector('#root'));
 
 //basiRouting import
 // import AppRouter from "./component/1.basicRouting.jsx";
