@@ -83,15 +83,19 @@
                 let minutesLeft = Math.floor(daysLeftS%(1000*60*60)/(1000*60));
                 let secondsLeft = Math.floor(daysLeftS%(1000*60)/1000);
 
-
+                // 完美解决时间格式，完美！
+                function format(n) {
+                    return (n.toString()[1] ? n.toString() : '0' + n)
+                }
+                // console.log(format(secondsLeft))
 
                 return (
                     <div className="counter">
                         <h1>{this.state.date.toLocaleString()}</h1>
-                        <span>{daysLeft}<b>d </b></span>
-                        <span>{hoursLeft}<b>h </b></span>
-                        <span>{minutesLeft}<b>m </b></span>
-                        <span>{secondsLeft}<b>s</b></span>    
+                        <span>{format(daysLeft)}<b>d </b></span>
+                        <span>{format(hoursLeft)}<b>h </b></span>
+                        <span>{format(minutesLeft)}<b>m </b></span>
+                        <span>{format(secondsLeft)}<b>s</b></span>    
                     </div>
                 )
             }
