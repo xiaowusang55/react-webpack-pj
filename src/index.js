@@ -6,7 +6,7 @@ import App from './component/2.nestedRouting.jsx';
 ReactDOM.render(<App />, document.querySelector('#root'));
 
 
-
+// ReactDOM.render(<counter />, document.querySelector('#root'))
 
 
 
