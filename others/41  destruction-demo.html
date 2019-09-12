@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<div id="root"></div>
+
+		<script crossorigin src="./lib/react.development.js"></script>
+		<script crossorigin src="./lib/react-dom.development.js"></script>
+		<script src="./lib/react-router-dom.min.js"></script>
+		<script src="./lib/babel.min.js"></script>
+
+		<script type="text/babel">
+			// ReactDOM.render(
+			// 	<input value="hi" />,
+			// 	document.querySelector("#root")
+			// );
+
+			// setTimeout(function() {
+			// 	ReactDOM.render(
+			// 		<input value={null} />,
+			// 		document.querySelector("#root")
+			// 	);
+			// }, 1000);
+
+			class EssayForm extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						value:
+							"Please write an essay about your favorite DOM element."
+					};
+
+					this.handleChange = this.handleChange.bind(this);
+					this.handleSubmit = this.handleSubmit.bind(this);
+				}
+
+				handleChange(event) {
+					this.setState({ value: event.target.value });
+				}
+
+				handleSubmit(event) {
+					alert("An essay was submitted: " + this.state.value);
+					event.preventDefault();
+				}
+
+				render() {
+					return (
+						<form onSubmit={this.handleSubmit}>
+							<label>
+								Essay:
+								<textarea
+									value='null'
+									onChange={this.handleChange}
+								/>
+							</label>
+							<input type="submit" value="Submit" />
+						</form>
+					);
+				}
+			}
+			ReactDOM.render(
+					<EssayForm value='null' />,
+					document.querySelector("#root")
+				);
+		</script>
+	</body>
+</html>
