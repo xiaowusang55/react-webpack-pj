@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script crossorigin src="./lib/react.development.js"></script>
+		<script crossorigin src="./lib/react-dom.development.js"></script>
+		<script src="./lib/react-router-dom.min.js"></script>
+		<script src="./lib/babel.min.js"></script>
+
+		<script type="text/babel">
+			
+			function FancyBorder(props) {
+				return (
+					<div className={'FancyBorder FancyBorder-' + props.color}>
+						{props.children}
+					</div>
+				)
+			}
+
+			function Dialog(props) {
+				return (
+					<FancyBorder color="blue">
+						<h1 className="Dialog-title">
+							{props.title}
+						</h1>
+						<p className="Dialog-message">
+							{props.message}	
+						</p>
+						{props.children}
+					</FancyBorder>
+				)
+			}
+
+			class SignUpDialog extends React.Component {
+
+				constructor(props) {
+					super(props);
+					this.state = {
+						value: ''
+					};
+					this.handleChange = this.handleChange.bind(this);
+					this.showLog = this.showLog.bind(this);
+				}	
+
+				handleChange(e) {
+					this.setState({
+						value: e.target.value,
+					})
+				}
+
+				showLog() {
+					alert(`Welcome  ${this.state.value}`);
+				}
+
+				render() {
+					const value = this.state.value;
+					return (
+						<Dialog
+							title="Mars exploration program"
+							message="How should we refer to you?"
+						>	
+							<input type="text"
+								value={value}
+								onChange={this.handleChange}
+							/>
+							<button onClick={this.showLog}>
+								Sign me up!
+							</button>
+							<h1>i am component</h1>
+						</Dialog>
+					)
+				}
+			}
+
+
+
+			ReactDOM.render(
+				<SignUpDialog />,
+				document.querySelector('#root')
+			)
+
+
+
+		</script>
+	</body>
+</html>
