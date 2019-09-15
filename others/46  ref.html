@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script crossorigin src="./lib/react.development.js"></script>
+		<script crossorigin src="./lib/react-dom.development.js"></script>
+		<script src="./lib/react-router-dom.min.js"></script>
+		<script src="./lib/babel.min.js"></script>
+
+		<script type="text/babel">
+			function CustomTextInput(props) {
+				return (
+					<div>
+						<input type="text" ref={props.inputRef} />
+					</div>
+				);
+			}
+
+			class Parent extends React.Component {
+				constructor(props) {
+					super(props);
+					this.inputElement = React.createRef();
+				}
+
+				render() {
+					return <CustomTextInput inputRef={this.inputElement} />;
+				}
+				focus() {
+					// Explicitly focus the text input using the raw DOM API
+					// Note: we're accessing "current" to get the DOM node
+					this.textInput.current.focus();
+				}
+			}
+
+			ReactDOM.render(<Parent />, document.querySelector("#root"));
+		</script>
+	</body>
+</html>
